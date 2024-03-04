@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins";
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgb(158, 158, 158);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  text-align: center;
+}
+
+body > h1 {
+  padding: 20px;
+}
+
+.recipes {
+  width: 80%;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.recipe-box {
+  position: relative;
+
+  height: 200px;
+
+  background-color: antiquewhite;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+a:nth-of-type(1) > .recipe-box {
+  background-image: url("images/ajvar.jpg");
+}
+
+a:nth-of-type(2) > .recipe-box {
+  background-image: url("images/polneti-piperki.jpg");
+}
+
+a:nth-of-type(3) > .recipe-box {
+  background-image: url("images/selsko-meso.jpg");
+}
+
+a:nth-of-type(4) > .recipe-box {
+  background-image: url("images/shopska-salata.jpg");
+}
+
+a:nth-of-type(5) > .recipe-box {
+  background-image: url("images/tavce-gravce.jpg");
+}
+
+a:nth-of-type(6) > .recipe-box {
+  background-image: url("images/pita-pastrmajlija.jpg");
+}
+
+.recipe-box div {
+  overflow-y: auto;
+  position: absolute;
+
+  padding: 20px 30px 20px 30px;
+
+  width: 100%;
+  height: 100%;
+
+  bottom: -100%;
+  left: 0;
+
+  background-color: rgba(51, 51, 51, 0.8);
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  transition: bottom 0.5s ease;
+}
+
+.recipe-box:hover div {
+  bottom: 0;
+}
+
+.recipe-box div ul {
+  text-align: left;
+}
+
+.recipe-box div p,
+.recipe-box div li {
+  font-size: 13px;
+}
