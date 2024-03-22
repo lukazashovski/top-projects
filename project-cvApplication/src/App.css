@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color: white;
+  font-family: "Poppins", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root {
+  background-color: rgb(38, 43, 61);
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* HEADER SECTION */
+
+.cv-application {
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.cv-application,
+.header,
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  padding-top: 5rem;
+  gap: 1rem;
+}
+
+.info {
+  gap: 1rem;
+  text-align: center;
+}
+
+.info > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.info > div > img {
+  width: 5rem;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem 1.5rem;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons > a {
+  color: white;
+  user-select: none;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.buttons > a:not(:last-child) {
+  font-size: 1.5rem;
+}
+
+.buttons > a:last-child {
+  padding: 0.5rem;
+  background-color: rgb(52, 60, 85);
+  grid-column: span 3;
+
+  border-radius: 0.5rem;
+}
+
+/* FORMS SECTION */
+
+.main {
+  width: 80vw;
+}
+
+.forms {
+  width: 40%;
+}
