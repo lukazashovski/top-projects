@@ -1,17 +1,13 @@
 import "../styles/Form.css";
 
-function Form({
-  faClass,
-  header,
-  setName,
-  setEmail,
-  setPhoneNumber,
-  setAddress,
-  name,
-  email,
-  phoneNumber,
-  address,
-}) {
+function Form({ faClass, header, formData, setFormData }) {
+  const handleChange = (field, value) => {
+    setFormData({
+      ...formData,
+      [field]: value,
+    });
+  };
+
   return (
     <div className="form">
       <div className="form-top">
@@ -23,40 +19,32 @@ function Form({
         <input
           type="text"
           id="name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          value={formData.name}
+          onChange={(e) => handleChange("name", e.target.value)}
         />
 
         <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          value={formData.email}
+          onChange={(e) => handleChange("email", e.target.value)}
         />
 
         <label htmlFor="phoneNumber">Phone Number</label>
         <input
           type="tel"
           id="phoneNumber"
-          value={phoneNumber}
-          onChange={(e) => {
-            setPhoneNumber(e.target.value);
-          }}
+          value={formData.phoneNumber}
+          onChange={(e) => handleChange("phoneNumber", e.target.value)}
         />
 
         <label htmlFor="address">Address</label>
         <input
           type="text"
           id="address"
-          value={address}
-          onChange={(e) => {
-            setAddress(e.target.value);
-          }}
+          value={formData.address}
+          onChange={(e) => handleChange("address", e.target.value)}
         />
       </div>
     </div>
