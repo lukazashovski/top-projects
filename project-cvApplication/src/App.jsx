@@ -2,19 +2,20 @@ import "./App.css";
 import { useState } from "react";
 import Form from "./components/Form";
 import CV from "./components/CV";
+import CustomDropdown from "./components/CustomDropdown";
 
-const DEFAULT_VALUES = {
+const FORM_DEFAULT_VALUES = {
   name: "John Doe",
   email: "john.doe@gmail.com",
-  phoneNumber: "123456789",
+  phoneNumber: "+12 345 6789",
   address: "123 Maple Street",
 };
 
 function App() {
-  const [formData, setFormData] = useState(DEFAULT_VALUES);
+  const [formData, setFormData] = useState(FORM_DEFAULT_VALUES);
 
   const handleReset = () => {
-    setFormData(DEFAULT_VALUES);
+    setFormData(FORM_DEFAULT_VALUES);
   };
 
   const handleErase = () => {
@@ -52,7 +53,7 @@ function App() {
               <i className="fa-brands fa-github"></i>
             </a>
             <a className="resetButton" onClick={handleReset}>
-              Reset
+              Load Example
             </a>
           </div>
         </div>
@@ -64,10 +65,16 @@ function App() {
               formData={formData}
               setFormData={setFormData}
             ></Form>
+            <CustomDropdown
+              defaultValues={{
+                name: "John Doe University",
+                visible: "true",
+              }}
+              faClass="fa-solid fa-user-graduate"
+              header="Education"
+            ></CustomDropdown>
           </div>
-          <div className="result">
-            <CV formData={formData}></CV>
-          </div>
+          <CV formData={formData}></CV>
         </div>
       </div>
     </>
