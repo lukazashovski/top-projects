@@ -104,12 +104,10 @@ html {
   padding-bottom: 2rem;
 
   width: 80vw;
-  height: 100vh;
-
-  gap: 4rem;
 
   display: flex;
   justify-content: space-between;
+  gap: 4rem;
 }
 
 .forms {

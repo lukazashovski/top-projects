@@ -66,10 +66,6 @@ function App() {
               setFormData={setFormData}
             ></Form>
             <CustomDropdown
-              defaultValues={{
-                name: "John Doe University",
-                visible: "true",
-              }}
               faClass="fa-solid fa-user-graduate"
               header="Education"
             ></CustomDropdown>
