@@ -1,19 +1,27 @@
-import { useState } from "react";
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+
 import "../styles/CustomDropdown.css";
 
 function DropDownItem({ defaultValues }) {
-  const [dropDownData, setDropDownData] = useState({
-    input1: "",
-    input2: "",
-    input3: "",
-    input4: "",
-    input5: "",
-    input1Name: "School",
-    input2Name: "Degree",
-    input3Name: "Start Date",
-    input4Name: "End Date",
-    input5Name: "Location",
-  });
+  const [dropDownData, setDropDownData] = useState(
+    defaultValues || {
+      input1: "",
+      input2: "",
+      input3: "",
+      input4: "",
+      input5: "",
+      input1Name: "School",
+      input2Name: "Degree",
+      input3Name: "Start Date",
+      input4Name: "End Date",
+      input5Name: "Location",
+    }
+  );
   const handleChange = (field, value) => {
     setDropDownData({
       ...dropDownData,
@@ -26,7 +34,7 @@ function DropDownItem({ defaultValues }) {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(defaultValues.isVisible ?? true);
   const [deleted, setDeleted] = useState(false);
 
   return (
@@ -101,17 +109,112 @@ function DropDownItem({ defaultValues }) {
   );
 }
 
-function CustomDropdown({ faClass, header }) {
-  const [itemList, setItemList] = useState([]);
+const CustomDropdown = React.forwardRef(({ faClass, header }, ref) => {
+  const itemListRef = useRef(null);
+
+  const [itemList, setItemList] = useState([
+    <DropDownItem
+      key="default1"
+      defaultValues={{
+        input1: "Default University",
+        input2: "Bachelor in Computer Science",
+        input3: "03/2024",
+        input4: "03/2027",
+        input5: "Mont Olympus",
+        input1Name: "School",
+        input2Name: "Degree",
+        input3Name: "Start Date",
+        input4Name: "End Date",
+        input5Name: "Location",
+      }}
+    />,
+    <DropDownItem
+      key="default2"
+      defaultValues={{
+        input1: "Hidden University",
+        input2: "Bachelor in Nothingness",
+        input3: "00/00",
+        input4: "00/-03",
+        input5: "Black Hole",
+        input1Name: "School",
+        input2Name: "Degree",
+        input3Name: "Start Date",
+        input4Name: "End Date",
+        input5Name: "Location",
+        isVisible: false,
+      }}
+    />,
+  ]);
 
   const addItem = () => {
     setItemList(
-      itemList.concat(<DropDownItem key={itemList.length}></DropDownItem>)
+      itemList.concat(
+        <DropDownItem
+          key={itemList.length}
+          defaultValues={{
+            input1: "",
+            input2: "",
+            input3: "",
+            input4: "",
+            input5: "",
+            input1Name: "School",
+            input2Name: "Degree",
+            input3Name: "Start Date",
+            input4Name: "End Date",
+            input5Name: "Location",
+          }}
+        />
+      )
     );
   };
 
+  const resetItems = () => {
+    setItemList([
+      <DropDownItem
+        key="default1"
+        defaultValues={{
+          input1: "Default University",
+          input2: "Bachelor in Computer Science",
+          input3: "03/2024",
+          input4: "03/2027",
+          input5: "Mont Olympus",
+          input1Name: "School",
+          input2Name: "Degree",
+          input3Name: "Start Date",
+          input4Name: "End Date",
+          input5Name: "Location",
+        }}
+      />,
+      <DropDownItem
+        key="default2"
+        defaultValues={{
+          input1: "Hidden University",
+          input2: "Bachelor in Nothingness",
+          input3: "00/00",
+          input4: "00/-03",
+          input5: "Black Hole",
+          input1Name: "School",
+          input2Name: "Degree",
+          input3Name: "Start Date",
+          input4Name: "End Date",
+          input5Name: "Location",
+          isVisible: false,
+        }}
+      />,
+    ]);
+  };
+
+  const eraseItems = () => {
+    setItemList([]);
+  };
+
+  useImperativeHandle(ref, () => ({
+    resetItems,
+    eraseItems,
+  }));
+
   return (
-    <div className="dropdown">
+    <div className="dropdown" ref={itemListRef}>
       <div className="dropdown-top">
         <div>
           <i className={faClass}></i>
@@ -127,6 +230,6 @@ function CustomDropdown({ faClass, header }) {
       </div>
     </div>
   );
-}
+});
 
 export default CustomDropdown;

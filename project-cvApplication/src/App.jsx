@@ -1,8 +1,10 @@
 import "./App.css";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import Form from "./components/Form";
 import CV from "./components/CV";
 import CustomDropdown from "./components/CustomDropdown";
+import ResetButton from "./components/ResetButton";
+import EraseButton from "./components/EraseButton";
 
 const FORM_DEFAULT_VALUES = {
   name: "John Doe",
@@ -13,18 +15,27 @@ const FORM_DEFAULT_VALUES = {
 
 function App() {
   const [formData, setFormData] = useState(FORM_DEFAULT_VALUES);
+  const dropdownRef = useRef();
 
-  const handleReset = () => {
+  const formReset = () => {
     setFormData(FORM_DEFAULT_VALUES);
   };
 
-  const handleErase = () => {
+  const formErase = () => {
     setFormData({
       name: "",
       email: "",
       phoneNumber: "",
       address: "",
     });
+  };
+
+  const dropDownReset = () => {
+    dropdownRef.current.resetItems();
+  };
+
+  const dropDownErase = () => {
+    dropdownRef.current.eraseItems();
   };
 
   return (
@@ -43,18 +54,18 @@ function App() {
             </p>
           </div>
           <div className="buttons">
-            <a className="eraseButton" onClick={handleErase}>
-              <i className="fa-solid fa-eraser"></i>
-            </a>
+            <EraseButton
+              onClickFunctions={[formErase, dropDownErase]}
+            ></EraseButton>
             <a className="printButton">
               <i className="fa-solid fa-print"></i>
             </a>
             <a target="_blank" href="https://github.com/lukazashovski">
               <i className="fa-brands fa-github"></i>
             </a>
-            <a className="resetButton" onClick={handleReset}>
-              Load Example
-            </a>
+            <ResetButton
+              onClickFunctions={[formReset, dropDownReset]}
+            ></ResetButton>
           </div>
         </div>
         <div className="main">
@@ -68,6 +79,7 @@ function App() {
             <CustomDropdown
               faClass="fa-solid fa-user-graduate"
               header="Education"
+              ref={dropdownRef}
             ></CustomDropdown>
           </div>
           <CV formData={formData}></CV>
