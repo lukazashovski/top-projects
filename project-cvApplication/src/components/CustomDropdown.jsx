@@ -2,7 +2,18 @@ import { useState } from "react";
 import "../styles/CustomDropdown.css";
 
 function DropDownItem({ defaultValues }) {
-  const [dropDownData, setDropDownData] = useState(defaultValues);
+  const [dropDownData, setDropDownData] = useState({
+    input1: "",
+    input2: "",
+    input3: "",
+    input4: "",
+    input5: "",
+    input1Name: "School",
+    input2Name: "Degree",
+    input3Name: "Start Date",
+    input4Name: "End Date",
+    input5Name: "Location",
+  });
   const handleChange = (field, value) => {
     setDropDownData({
       ...dropDownData,
@@ -95,18 +106,7 @@ function CustomDropdown({ faClass, header }) {
 
   const addItem = () => {
     setItemList(
-      itemList.concat(
-        <DropDownItem
-          key={itemList.length}
-          defaultValues={{
-            input1Name: "School",
-            input2Name: "Degree",
-            input3Name: "Start Date",
-            input4Name: "End Date",
-            input5Name: "Location",
-          }}
-        ></DropDownItem>
-      )
+      itemList.concat(<DropDownItem key={itemList.length}></DropDownItem>)
     );
   };
 
