@@ -41,6 +41,7 @@ function App() {
 
   const ResetButtonAction = () => {
     setFormData(FORM_DEFAULT_VALUES);
+    setDropdownItems(DROPDOWN_DEFAULT_VALUES);
   };
 
   const EraseButtonAction = () => {
