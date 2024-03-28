@@ -1,6 +1,6 @@
 import "../styles/CV.css";
 
-function CV({ formData }) {
+function CV({ formData, itemData }) {
   return (
     <div className="cv-result">
       <div className="cv-top">
