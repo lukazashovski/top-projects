@@ -1,6 +1,6 @@
 import "../styles/CV.css";
 
-function CV({ formData, itemData }) {
+function CV({ formData, educationData }) {
   return (
     <div className="cv-result">
       <div className="cv-top">
@@ -19,6 +19,25 @@ function CV({ formData, itemData }) {
             {formData.address}
           </p>
         </div>
+      </div>
+      <div className="cv-main">
+        {educationData && educationData.length > 0 && (
+          <div className="education">
+            <h1>Education</h1>
+            {educationData
+              .filter((education) => education.isVisible)
+              .map((education, index) => (
+                <div key={index} className="education-item">
+                  <p>{education.input1}</p>
+                  <p>{education.input2}</p>
+                  <p>
+                    {education.input3} - {education.input4}
+                  </p>
+                  <p>{education.input5}</p>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

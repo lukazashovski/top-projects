@@ -19,6 +19,7 @@ const FORM_DEFAULT_VALUES = {
 
 const DROPDOWN_DEFAULT_VALUES = [
   {
+    isVisible: true,
     input1: "Default University",
     input2: "Bachelor in CSE",
     input3: "28/03/2024",
@@ -55,12 +56,25 @@ function App() {
   };
 
   const addDropdownItem = () => {
-    setDropdownItems([...dropdownItems, {}]);
+    setDropdownItems([...dropdownItems, { isVisible: true }]);
+    console.log(dropdownItems);
   };
 
   const handleDropDownChange = (index, field, value) => {
     const updatedItems = [...dropdownItems];
     updatedItems[index][field] = value;
+    setDropdownItems(updatedItems);
+  };
+
+  const deleteDropDownItem = (index) => {
+    const updatedItems = [...dropdownItems];
+    updatedItems.splice(index, 1);
+    setDropdownItems(updatedItems);
+  };
+
+  const visibleDropDownItem = (index, visible) => {
+    const updatedItems = [...dropdownItems];
+    updatedItems[index].isVisible = visible;
     setDropdownItems(updatedItems);
   };
 
@@ -108,6 +122,8 @@ function App() {
                   key={index}
                   index={index}
                   handleDropDownChange={handleDropDownChange}
+                  deleteDropDownItem={deleteDropDownItem}
+                  visibleDropDownItem={visibleDropDownItem}
                   dropDownData={item}
                   defaultInputNames={{
                     input1Name: "School",
@@ -120,7 +136,7 @@ function App() {
               ))}
             </CustomDropdown>
           </div>
-          <CV formData={formData}></CV>
+          <CV formData={formData} educationData={dropdownItems}></CV>
         </div>
       </div>
     </>
