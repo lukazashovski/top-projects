@@ -21,11 +21,10 @@ function DropDownItem({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const [visible, setVisible] = useState(dropDownData.isVisible ?? true);
-
+  let visible = dropDownData.isVisible;
   const handleVisible = () => {
-    setVisible(!visible);
-    visibleDropDownItem(index, !visible);
+    visible = !dropDownData.isVisible;
+    visibleDropDownItem(index, visible);
   };
 
   const {

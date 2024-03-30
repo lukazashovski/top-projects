@@ -1,6 +1,6 @@
 import "../styles/CV.css";
 
-function CV({ formData, educationData }) {
+function CV({ formData, educationData, experienceData }) {
   return (
     <div className="cv-result">
       <div className="cv-top">
@@ -22,18 +22,35 @@ function CV({ formData, educationData }) {
       </div>
       <div className="cv-main">
         {educationData && educationData.length > 0 && (
-          <div className="education">
+          <div className="dropdown-element">
             <h1>Education</h1>
             {educationData
               .filter((education) => education.isVisible)
               .map((education, index) => (
-                <div key={index} className="education-item">
+                <div key={index} className="dropdown-child">
                   <p>{education.input1}</p>
                   <p>{education.input2}</p>
                   <p>
                     {education.input3} - {education.input4}
                   </p>
                   <p>{education.input5}</p>
+                </div>
+              ))}
+          </div>
+        )}
+        {experienceData && experienceData.length > 0 && (
+          <div className="dropdown-element">
+            <h1>Experience</h1>
+            {experienceData
+              .filter((experience) => experience.isVisible)
+              .map((experience, index) => (
+                <div key={index} className="dropdown-child">
+                  <p>{experience.input1}</p>
+                  <p>{experience.input2}</p>
+                  <p>
+                    {experience.input3} - {experience.input4}
+                  </p>
+                  <p>{experience.input5}</p>
                 </div>
               ))}
           </div>

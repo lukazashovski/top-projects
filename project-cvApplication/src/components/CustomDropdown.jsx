@@ -1,5 +1,4 @@
 import "../styles/CustomDropdown.css";
-import DropDownItem from "./DropDownItem";
 
 function CustomDropdown({ faClass, header, addDropdownItem, children }) {
   return (

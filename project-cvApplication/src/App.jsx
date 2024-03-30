@@ -17,7 +17,7 @@ const FORM_DEFAULT_VALUES = {
   address: "123 Maple Street",
 };
 
-const DROPDOWN_DEFAULT_VALUES = [
+const EDUCATION_DEFAULT_VALUES = [
   {
     isVisible: true,
     input1: "Default University",
@@ -36,13 +36,38 @@ const DROPDOWN_DEFAULT_VALUES = [
   },
 ];
 
+const EXPERIENCE_DEFAULT_VALUES = [
+  {
+    isVisible: true,
+    input1: "Default Job",
+    input2: "Principal",
+    input3: "28/03/2024",
+    input4: "28/03/2027",
+    input5: "TU Delft, Delft, The Netherlands",
+  },
+  {
+    isVisible: false,
+    input1: "Unknown Job",
+    input2: "President",
+    input3: "01/01/0001",
+    input4: "10/10/1000",
+    input5: "Unknown, Unknown",
+  },
+];
+
 function App() {
   const [formData, setFormData] = useState(FORM_DEFAULT_VALUES);
-  const [dropdownItems, setDropdownItems] = useState(DROPDOWN_DEFAULT_VALUES);
+  const [educationItems, setEducationItems] = useState(
+    EDUCATION_DEFAULT_VALUES
+  );
+  const [experienceItems, setExperienceItems] = useState(
+    EXPERIENCE_DEFAULT_VALUES
+  );
 
   const ResetButtonAction = () => {
     setFormData(FORM_DEFAULT_VALUES);
-    setDropdownItems(DROPDOWN_DEFAULT_VALUES);
+    setEducationItems(EDUCATION_DEFAULT_VALUES);
+    setExperienceItems(EXPERIENCE_DEFAULT_VALUES);
   };
 
   const EraseButtonAction = () => {
@@ -52,30 +77,54 @@ function App() {
       phoneNumber: "",
       address: "",
     });
-    setDropdownItems([]);
+    setEducationItems([]);
+    setExperienceItems([]);
   };
 
-  const addDropdownItem = () => {
-    setDropdownItems([...dropdownItems, { isVisible: true }]);
-    console.log(dropdownItems);
+  /* EDUCATION DROPDOWN */
+  const addEducationItem = () => {
+    setEducationItems([...educationItems, { isVisible: true }]);
   };
 
-  const handleDropDownChange = (index, field, value) => {
-    const updatedItems = [...dropdownItems];
+  const handleEducationChange = (index, field, value) => {
+    const updatedItems = [...educationItems];
     updatedItems[index][field] = value;
-    setDropdownItems(updatedItems);
+    setEducationItems(updatedItems);
   };
 
-  const deleteDropDownItem = (index) => {
-    const updatedItems = [...dropdownItems];
+  const deleteEducationItem = (index) => {
+    const updatedItems = [...educationItems];
     updatedItems.splice(index, 1);
-    setDropdownItems(updatedItems);
+    setEducationItems(updatedItems);
   };
 
-  const visibleDropDownItem = (index, visible) => {
-    const updatedItems = [...dropdownItems];
+  const visibleEducationItem = (index, visible) => {
+    const updatedItems = [...educationItems];
     updatedItems[index].isVisible = visible;
-    setDropdownItems(updatedItems);
+    setEducationItems(updatedItems);
+  };
+
+  /* EXPERIENCE DROPDOWN */
+  const addExperienceItem = () => {
+    setExperienceItems([...experienceItems, { isVisible: true }]);
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const updatedItems = [...experienceItems];
+    updatedItems[index][field] = value;
+    setExperienceItems(updatedItems);
+  };
+
+  const deleteExperienceItem = (index) => {
+    const updatedItems = [...experienceItems];
+    updatedItems.splice(index, 1);
+    setExperienceItems(updatedItems);
+  };
+
+  const visibleExperienceItem = (index, visible) => {
+    const updatedItems = [...experienceItems];
+    updatedItems[index].isVisible = visible;
+    setExperienceItems(updatedItems);
   };
 
   return (
@@ -115,15 +164,15 @@ function App() {
             <CustomDropdown
               faClass="fa-solid fa-user-graduate"
               header="Education"
-              addDropdownItem={addDropdownItem}
+              addDropdownItem={addEducationItem}
             >
-              {dropdownItems.map((item, index) => (
+              {educationItems.map((item, index) => (
                 <DropDownItem
                   key={index}
                   index={index}
-                  handleDropDownChange={handleDropDownChange}
-                  deleteDropDownItem={deleteDropDownItem}
-                  visibleDropDownItem={visibleDropDownItem}
+                  handleDropDownChange={handleEducationChange}
+                  deleteDropDownItem={deleteEducationItem}
+                  visibleDropDownItem={visibleEducationItem}
                   dropDownData={item}
                   defaultInputNames={{
                     input1Name: "School",
@@ -135,8 +184,35 @@ function App() {
                 />
               ))}
             </CustomDropdown>
+            <CustomDropdown
+              faClass="fa-solid fa-briefcase"
+              header="Experience"
+              addDropdownItem={addExperienceItem}
+            >
+              {experienceItems.map((item, index) => (
+                <DropDownItem
+                  key={index}
+                  index={index}
+                  handleDropDownChange={handleExperienceChange}
+                  deleteDropDownItem={deleteExperienceItem}
+                  visibleDropDownItem={visibleExperienceItem}
+                  dropDownData={item}
+                  defaultInputNames={{
+                    input1Name: "Job Name",
+                    input2Name: "Position",
+                    input3Name: "Start Date",
+                    input4Name: "End Date",
+                    input5Name: "Location",
+                  }}
+                />
+              ))}
+            </CustomDropdown>
           </div>
-          <CV formData={formData} educationData={dropdownItems}></CV>
+          <CV
+            formData={formData}
+            educationData={educationItems}
+            experienceData={experienceItems}
+          ></CV>
         </div>
       </div>
     </>
